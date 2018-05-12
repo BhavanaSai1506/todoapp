@@ -1,0 +1,28 @@
+{
+  "name": "todoapp-core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@angular/common": "6.0.0",
+    "@angular/core": "6.0.0",
+    "@angular/http": "6.0.0",
+    "@ngrx/core": "1.2.0",
+    "@ngrx/effects": "6.0.0-beta.1",
+    "@ngrx/entity": "6.0.0-beta.1",
+    "@ngrx/store": "6.0.0-beta.1",
+    "@ngrx/store-devtools": "6.0.0-beta.1",
+    "ngrx-store-freeze": "0.2.2",
+    "reselect": "3.0.1",
+    "rxjs": "6.1.0",
+    "tassign": "1.0.0"
+  },
+  "devDependencies": {
+    "@angular/cli": "6.0.0"
+  }
+}
