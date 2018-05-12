@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 
-import {API_URL} from "@core/shared/constants";
+import {ACCESS_TOKEN_STORAGE_KEY, API_URL} from "@core/shared/constants";
 import {ILocalStorage, LocalStorage} from "@core/shared/services/storage";
 import {
     ApiCustomHeaders,
@@ -117,8 +117,8 @@ export class ApiService {
      * @returns {String}
      */
     public getAccessToken(): string {
-        const user = this.localStorage.retrieve('user');
-        return (user && user.accessToken) ? `Bearer ${user.accessToken}` : null;
+        const token = this.localStorage.getItem(ACCESS_TOKEN_STORAGE_KEY);
+        return (token) ? `${token}` : null;
     }
 
     /**
@@ -126,11 +126,9 @@ export class ApiService {
      * @param {string} accessToken - access token to save in localstorage
      * @returns {void}
      */
-    private setAccessToken(accessToken: string): void {
-        const user = this.localStorage.getItem('user');
-
-        if (user && accessToken) {
-            this.localStorage.setItem('user', user);
+    setAccessToken(accessToken: string): void {
+        if (accessToken) {
+            this.localStorage.setItem(ACCESS_TOKEN_STORAGE_KEY, JSON.stringify(accessToken));
         }
     }
 

@@ -13,6 +13,11 @@ import {StoreModule} from "@ngrx/store";
 import {ApiService} from "@core/shared/services/api/api.service";
 import {CoreModule} from "@core/core.module";
 import {LocalStorage} from "@core/shared/services/storage";
+import {SharedModule} from "src/app/shared/shared.module";
+import {routes} from "src/app/app.routes";
+import {TodosModule} from "src/app/modules/todos/todos.module";
+import {AuthModule} from "src/app/modules/auth/auth.module";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 export function storage() {
@@ -28,6 +33,14 @@ export function storage() {
     CommonModule,
 
     HttpClientModule,
+
+    NgbModule.forRoot(),
+
+    SharedModule,
+    routes,
+
+    TodosModule,
+    AuthModule,
 
     CoreModule.forRoot([
       {provide: LocalStorage, useFactory: (storage)}

@@ -21,6 +21,7 @@ import {
     UpdateTodoSuccess
 } from "@core/store/todo/actions";
 import {Todo} from "@core/store/todo/models";
+import {mergeMap} from "rxjs/internal/operators";
 
 @Injectable()
 export class TodosEffects {
@@ -39,17 +40,22 @@ export class TodosEffects {
         )
     );
 
+    @Effect()
     add$: Observable<Action> = this.actions$.pipe(
         ofType<AddTodo>(TodoActionTypes.AddTodo),
         map((action: AddTodo) => action.payload),
         switchMap((payload: Partial<Todo>) =>
             this.todosService.add(payload).pipe(
-                map((response: Todo) => new AddTodoSuccess(response)),
+                mergeMap((response: Todo) => [
+                    new AddTodoSuccess(response),
+                    new Load()
+                ]),
                 catchError(err => of(new AddTodoFail(err)))
             )
         )
     );
 
+    @Effect()
     update$: Observable<Action> = this.actions$.pipe(
         ofType<UpdateTodo>(TodoActionTypes.UpdateTodo),
         map((action: UpdateTodo) => action.payload),
@@ -61,12 +67,13 @@ export class TodosEffects {
         )
     );
 
+    @Effect()
     delete$: Observable<Action> = this.actions$.pipe(
         ofType<RemoveTodo>(TodoActionTypes.RemoveTodo),
         map((action: RemoveTodo) => action.payload),
         switchMap((payload: Todo) =>
-            this.todosService.update(payload).pipe(
-                map((response: Todo) => new RemoveTodoSuccess(response)),
+            this.todosService.delete(payload).pipe(
+                map((response: Todo) => new RemoveTodoSuccess(payload)),
                 catchError(err => of(new RemoveTodoFail(err)))
             )
         )

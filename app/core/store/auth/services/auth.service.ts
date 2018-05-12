@@ -5,12 +5,7 @@ import {UserLogin, UserLoginResponse, UserRegister} from "@core/store/auth/model
 import {ApiUrls} from "@core/shared/services/api";
 import {ILocalStorage, LocalStorage} from "@core/shared/services/storage";
 import {ApiService} from "@core/shared/services/api/api.service";
-
-/**
- * Storage Constants
- */
-const USER_STORAGE_KEY = "user";
-const ACCESS_TOKEN_STORAGE_KEY = "Authorization";
+import {ACCESS_TOKEN_STORAGE_KEY, USER_STORAGE_KEY} from "@core/shared/constants";
 
 @Injectable()
 export class AuthService {
@@ -27,7 +22,7 @@ export class AuthService {
 
                     const {user, token} = response;
 
-                    AuthService.saveUserResponseToStorage({user, token});
+                    this.saveUserResponseToStorage({user, token});
 
                     observer.next({user, token});
                     observer.complete();
@@ -46,7 +41,7 @@ export class AuthService {
 
                     const {user, token} = response;
 
-                    AuthService.saveUserResponseToStorage({user, token});
+                    this.saveUserResponseToStorage({user, token});
 
                     observer.next({user, token});
                     observer.complete();
@@ -79,7 +74,7 @@ export class AuthService {
         });
     }
 
-    private static saveUserResponseToStorage({user, token}): void {
+    private saveUserResponseToStorage({user, token}): void {
 
         localStorage.setItem(
             USER_STORAGE_KEY,

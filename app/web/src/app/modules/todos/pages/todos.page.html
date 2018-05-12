@@ -1,0 +1,34 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+                <h1>Todos</h1>
+                <input type="text" class="form-control add-todo" [(ngModel)]="todoInput" placeholder="Add todo">
+                <br/>
+                <button class="btn btn-success" (click)="addTodo()">Add</button>
+                <hr>
+                <ul id="sortable" class="list-unstyled">
+                    <li class="ui-state-default" *ngFor="let todo of unfineshedTodos$ | async">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"
+                                [ngModel]="todo.completed"
+                                (ngModelChange)="setCompleted(todo)" />{{todo.title}}</label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="todo-footer">
+                    <strong><span class="count-todos">{{ (unfineshedTodos$ | async)?.length }}</span></strong> Items Left
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+                <h1>Already Done</h1>
+                <ul id="done-items" class="list-unstyled">
+                    <li *ngFor="let todo of finishedTodos$ | async">{{todo.title}} <button (click)="delete(todo)" class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span>Remove</button></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

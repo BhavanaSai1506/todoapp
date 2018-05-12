@@ -7,12 +7,14 @@ import {TodoActionTypes} from "@core/store/todo/actions";
 
 export interface State extends EntityState<Todo> {
     inProgress: boolean;
+    error: string;
 }
 
 export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: State = todoAdapter.getInitialState({
-    inProgress: false
+    inProgress: false,
+    error: null
 });
 
 export function reducer(
@@ -37,7 +39,8 @@ export function reducer(
         case TodoActionTypes.LoadFail: {
             return {
                 ...state,
-                inProgress: false
+                inProgress: false,
+                error: action.payload
             }
         }
 
@@ -52,6 +55,7 @@ export function reducer(
             return todoAdapter.addMany(action.payload, {
                 ...state,
                 inProgress: false,
+                error: null
             });
         }
 
@@ -77,3 +81,11 @@ export function reducer(
 }
 
 export const getInProgress = (state: State) => state.inProgress;
+export const getError = (state: State) => state.error;
+
+export const {
+    selectIds,
+    selectEntities,
+    selectTotal,
+    selectAll
+} = todoAdapter.getSelectors();

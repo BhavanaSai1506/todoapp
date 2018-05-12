@@ -26,7 +26,7 @@ export enum TodoActionTypes {
 export class AddTodo implements Action {
     readonly type = TodoActionTypes.AddTodo;
 
-    constructor(public payload: Todo) {
+    constructor(public payload: Partial<Todo>) {
     }
 }
 

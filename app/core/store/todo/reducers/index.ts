@@ -15,18 +15,24 @@ export const reducers: ActionReducerMap<any> = {
     todos: fromTodo.reducer
 };
 
-export const selectTodoState = createFeatureSelector<fromTodo.State>('todo');
+export const selectTodoState = createFeatureSelector<TodoState>('todos');
 
-export const {
-    selectIds: selectTodoIds,
-    selectEntities: selectTodoEntities,
-    selectTotal: selectTodosTotal,
-    selectAll: selectAllTodos
-} = fromTodo.todoAdapter.getSelectors(
-    selectTodoState
+export const selectTodos = createSelector(
+    selectTodoState,
+    (state: TodoState) => state.todos
 );
 
 export const getInProgress = createSelector(
-    selectTodoState,
+    selectTodos,
     fromTodo.getInProgress
+);
+
+export const getError = createSelector(
+    selectTodos,
+    fromTodo.getError
+);
+
+export const selectAllTodos = createSelector(
+    selectTodos,
+    fromTodo.selectAll
 );
