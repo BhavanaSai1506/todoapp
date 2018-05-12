@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "@core/*": [
+        "../core/*"
+      ],
+      "@angular/common": [
+        "../node_modules/@angular/common"
+      ],
+      "@angular/core": [
+        "../node_modules/@angular/core"
+      ],
+      "@angular/common/http": [
+        "../node_modules/@angular/common/http"
+      ],
+      "rxjs/*": [
+        "../node_modules/rxjs/*"
+      ],
+      "@ngrx/*": [
+        "../node_modules/@ngrx/*"
+      ]
+    }
+  }
+}

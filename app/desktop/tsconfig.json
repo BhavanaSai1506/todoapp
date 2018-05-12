@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": [
+      "es2015",
+      "dom",
+      "esnext"
+    ],
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "removeComments": false,
+    "outDir": "dist",
+    "baseUrl": "./",
+    "paths": {
+      "@core/*": [
+        "../core/*"
+      ],
+      "@angular/common": [
+        "../node_modules/@angular/common"
+      ],
+      "@angular/core": [
+        "../node_modules/@angular/core"
+      ],
+      "@angular/common/http": [
+        "../node_modules/@angular/common/http"
+      ],
+      "rxjs/*": [
+        "../node_modules/rxjs/*"
+      ],
+      "@ngrx/*": [
+        "../node_modules/@ngrx/*"
+      ]
+    }
+  }
+}
